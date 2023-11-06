@@ -33,20 +33,6 @@
         </div>
       </div>
     </div>
-
-    <div class="carousel_box_one relative" v-for="carousel in carousels" :key="carousel.id">
-      <div class="carousel_box_image" :style="{background:`url(${carousel.image })` + `no-repeat right  center/cover`}">
-        <div class="carousel_box_overlay"></div>
-      </div>
-      <div :class="`${carousel.class}`">
-        <div class="text_box p-10 text-right">
-          <h3 class="text-white text-3xl font-bold">{{carousel.quote}}</h3>
-          <h4 class="text-white text-2xl">- {{carousel.author}}</h4>
-        </div>
-      </div>
-    </div>
-
-
   </div>
 
 </template>
@@ -100,18 +86,13 @@ export default {
           class:'carousel_box_polygon_background_5'
         }
       ],
-      images: [
-        "https://picsum.photos/id/237/1024/800",
-        "https://picsum.photos/id/238/1024/800",
-        "https://picsum.photos/id/239/1024/800"
-      ],
       active: 0
     }
   },
   mounted() {
     let i = 0;
     setInterval(() => {
-      if (i > this.images.length - 1) {
+      if (i > this.carousels.length - 1) {
         i = 0;
       }
       this.active = i;
@@ -147,12 +128,8 @@ export default {
   background: darkred;
 }
 .carousel_box_image{
-  //background-image: url("https://source.unsplash.com/silhouette-of-person-standing-on-rock-surrounded-by-body-of-water-odxB5oIG_iA");
   height: 100%;
   width: 600px;
-  //background-position: right;
-  //background-size: cover;
-  //background-repeat: no-repeat;
   position: absolute;
   right: 0;
   top: 0;
@@ -164,45 +141,45 @@ export default {
 }
 
 .text_box{
-  width: 70%;
+  width: 65%;
 }
 .carousel_box_polygon_background_1{
   height: 300px;
   width: 100%;
-  clip-path: polygon(0 0, 70% 0, 79% 100%, 0% 100%);
-  -webkit-clip-path: polygon(0 0, 70% 0, 79% 100%, 0% 100%);
+  clip-path: polygon(0 0, 65% 0, 79% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0 0, 65% 0, 79% 100%, 0% 100%);
   background: rgb(2,0,36);
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 79%, rgba(3,3,196,1) 100%);
 }
 .carousel_box_polygon_background_2{
   height: 300px;
   width: 100%;
-  clip-path: polygon(0 0, 70% 0, 79% 100%, 0% 100%);
-  -webkit-clip-path: polygon(0 0, 70% 0, 79% 100%, 0% 100%);
+  clip-path: polygon(0 0, 65% 0, 79% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0 0, 65% 0, 79% 100%, 0% 100%);
   background: rgb(123,31,162);
   background: linear-gradient(90deg, rgba(123,31,162,1) 0%, rgba(142,36,170,1) 79%, rgba(171,71,188,1) 100%);
 }
 .carousel_box_polygon_background_3{
   height: 300px;
   width: 100%;
-  clip-path: polygon(0 0, 70% 0, 79% 100%, 0% 100%);
-  -webkit-clip-path: polygon(0 0, 70% 0, 79% 100%, 0% 100%);
+  clip-path: polygon(0 0, 65% 0, 79% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0 0, 65% 0, 79% 100%, 0% 100%);
   background: rgb(1,71,55);
   background: linear-gradient(90deg, rgba(1,71,55,1) 0%, rgba(3,84,63,1) 79%, rgba(5,122,85,1) 100%);
 }
 .carousel_box_polygon_background_4{
   height: 300px;
   width: 100%;
-  clip-path: polygon(0 0, 70% 0, 79% 100%, 0% 100%);
-  -webkit-clip-path: polygon(0 0, 70% 0, 79% 100%, 0% 100%);
+  clip-path: polygon(0 0, 65% 0, 79% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0 0, 65% 0, 79% 100%, 0% 100%);
   background: rgb(159,88,10);
   background: linear-gradient(90deg, rgba(159,88,10,1) 0%, rgba(194,120,3,1) 79%, rgba(250,202,21,1) 100%);
 }
 .carousel_box_polygon_background_5{
   height: 300px;
   width: 100%;
-  clip-path: polygon(0 0, 70% 0, 79% 100%, 0% 100%);
-  -webkit-clip-path: polygon(0 0, 70% 0, 79% 100%, 0% 100%);
+  clip-path: polygon(0 0, 65% 0, 79% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0 0, 65% 0, 79% 100%, 0% 100%);
   background: rgb(117,26,61);
   background: linear-gradient(90deg, rgba(117,26,61,1) 0%, rgba(153,21,75,1) 79%, rgba(214,31,105,1) 100%);
 }
