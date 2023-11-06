@@ -22,12 +22,7 @@
         </div>
       </div>
     </div>
-    <div class="relative">
-      <div class="right_image_box absolute top-0 right-0 bg-red-700">
 
-      </div>
-      <div class="carousel_item_box absolute top-0 left-0"></div>
-    </div>
   </div>
 
 </template>
