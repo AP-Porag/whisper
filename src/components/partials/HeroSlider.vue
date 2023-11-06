@@ -97,7 +97,7 @@ export default {
       }
       this.active = i;
       i++;
-    }, 5000);
+    }, 2000);
   }
 }
 </script>
