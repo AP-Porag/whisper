@@ -1,34 +1,14 @@
 <template>
-  <div class="bg-white p-6 rounded-lg shadow-lg">
-    <h2 class="text-2xl font-bold mb-2 text-gray-800">Card with no image</h2>
-    <p class="text-gray-700">This is my cool new card!</p>
-    <p class="text-gray-700">Post by : user name</p>
-    <p class="text-gray-700">Author : some name</p>
-
-    <div class="rating-component">
-      <div class="rating-buttons">
-        <a class="button like">
-          <div class="rate-icon">
-            <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%;"><g class="style-scope yt-icon">
-              <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z" class="style-scope yt-icon"></path>
-            </g></svg>
-          </div>
-          <div id="rate-count-positive">0</div>
-        </a>
-
-        <a class="button dislike">
-          <div class="rate-icon">
-            <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%;"><g class="style-scope yt-icon">
-              <path d="M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v1.91l.01.01L1 14c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z" class="style-scope yt-icon"></path>
-            </g></svg>
-          </div>
-          <div id="rate-count-negative">0</div>
-        </a>
-      </div>
-      <!-- 	<div class="sentiment">
-          <div id="positive-bar"></div>
-        </div> -->
+  <div class="blog_post">
+    <div class="img_pod">
+      <img src="https://pbs.twimg.com/profile_images/890901007387025408/oztASP4n.jpg" alt="random image">
     </div>
+    <div class="container_copy">
+      <h3>12 January 2019</h3>
+      <h1>CSS Positioning</h1>
+      <p>The position property specifies the type of positioning method used for an element (static, relative, absolute, fixed, or sticky).</p>
+    </div>
+
   </div>
 </template>
 
@@ -39,70 +19,65 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap");
 
-body {
-  background: #181818;
+.blog_post {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+
+.container_copy {
+  //padding: 6rem 4rem 0px 4rem;
+  padding: 4rem 4rem 0px 4rem;
+}
+
+.img_pod {
+  height: 110px;
+  width: 110px;
+  background: linear-gradient(90deg, #ff9966, #ff5e62);
+  z-index: 10;
+  box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
+  border-radius: 100%;
+  position: absolute;
+  left: -10%;
+  top: -13%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
+  justify-content: center;
 }
 
-.rating-component {
-  max-width: 150px;
-  display: flex;
-  flex-direction: column;
-
-  .rating-buttons {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 15px;
-    justify-content: space-between;
-
-    .button {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      color: #909090;
-
-      &:first-child {
-        margin-right: 1em;
-      }
-
-      .rate-icon {
-        margin-right: 5px;
-
-        svg {
-          fill: #909090;
-        }
-      }
-
-      #rate-count-positive,
-      #rate-count-negative {
-        font-size: 13px;
-        text-transform: uppercase;
-        user-select: none;
-      }
-    }
-  }
-
-  .sentiment {
-    height: 2.5px;
-    width: 100%;
-    background: #606060;
-    position: relative;
-
-    #positive-bar {
-      position: absolute;
-      background: #53a7ff;
-      height: inherit;
-    }
-  }
-
-  .rate-icon {
-    width: 20px;
-  }
+img {
+  height: 110px;
+  width: 110px;
+  position: relative;
+  border-radius: 100%;
+  box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
+  z-index: 1;
 }
+
+h3 {
+  margin: 0 0 0.5rem 0;
+  color: #999;
+  font-size: 1.25rem;
+}
+
+h1 {
+  margin: 0 0 1rem 0;
+  font-size: 2.5rem;
+  letter-spacing: 0.5px;
+  color: #333;
+}
+
+p {
+  margin: 0 0 4.5rem 0;
+  font-size: 1.5rem;
+  line-height: 1.45;
+  color: #333;
+}
+
+
+
 </style>

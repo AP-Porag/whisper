@@ -5,6 +5,8 @@
     </div>
     <Hero/>
     <Quotes/>
+    <Favorites/>
+    <Footer/>
   </div>
 <!--<div class="">-->
 <!--  <Hero/>-->
@@ -14,10 +16,14 @@
 <script>
 import Hero from '../src/components/Hero.vue'
 import Quotes from "./components/Quotes.vue";
+import Favorites from "./components/Favorites.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
   name: 'App',
   components:{
+    Footer,
+    Favorites,
     Quotes,
     Hero,
   },
