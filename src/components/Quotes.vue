@@ -1,12 +1,13 @@
 <template>
   <div class="">
+    <CreateQuoteModal/>
     <div class="p-20 container">
-      <h3 class="text-blue-300 mb-4 text-lg font-bold mb-20">
+      <h3 class="text-blue-300 mb-4 text-lg font-bold mb-30" style="margin-bottom: 100px;">
         Latest Quotes
       </h3>
       <div class="m-auto grid grid-cols-1 md:grid-cols-2 gap-20">
-        <Quote/>
-        <Quote/>
+        <Quote :id="1"/>
+        <Quote :id="2"/>
       </div>
     </div>
   </div>
@@ -14,10 +15,12 @@
 
 <script>
 import Quote from "./partials/Quote.vue";
+import CreateQuoteModal from "./modals/CreateQuoteModal.vue";
 
 export default {
   name: "Quotes",
   components:{
+    CreateQuoteModal,
     Quote
   }
 }

@@ -1,11 +1,11 @@
 <template>
   <header class="absolute inset-x-0 top-0 z-50">
-    <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+    <nav class="flex items-center justify-between p-6 lg:px-8 " style="background: white;padding-right: 78px;padding-left: 78px" aria-label="Global">
       <div class="flex lg:flex-1">
-        <a href="/" class="-m-1.5 p-1.5">
+        <router-link to="/" class="-m-1.5 p-1.5">
           <span class="sr-only">Whisper</span>
           <img class="h-8 w-auto" src="../../assets/vue.svg" alt="">
-        </a>
+        </router-link>
         <span class="mt-1 ml-3 text-lg font-semibold uppercase" style="color: #37bdf8">Whisper</span>
       </div>
       <div class="flex lg:hidden">
@@ -17,12 +17,12 @@
         </button>
       </div>
       <div class="hidden lg:flex lg:gap-x-12">
-        <a href="/" class="text-sm font-semibold leading-6 text-gray-900">Home</a>
-        <a href="#" class="text-sm font-semibold leading-6 text-gray-900">My Quotes</a>
+        <router-link to="/" class="text-sm font-semibold leading-6 text-gray-900">Home</router-link>
+        <router-link to="/my-account" class="text-sm font-semibold leading-6 text-gray-900">My Quotes</router-link>
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <a href="#" class="text-sm font-semibold leading-6 text-gray-900 mr-5">Sign up <span aria-hidden="true"></span></a>
-        <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span aria-hidden="true"></span></a>
+        <router-link to="/registration" class="text-sm font-semibold leading-6 text-gray-900 mr-5">Sign up <span aria-hidden="true"></span></router-link>
+        <router-link to="/login" class="text-sm font-semibold leading-6 text-gray-900">Log in <span aria-hidden="true"></span></router-link>
       </div>
     </nav>
     <!-- Mobile menu, show/hide based on menu open state. -->
@@ -31,10 +31,10 @@
       <div class="fixed inset-0 z-50"></div>
       <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
         <div class="flex items-center justify-between">
-          <a href="#" class="-m-1.5 p-1.5">
+          <router-link to="/" class="-m-1.5 p-1.5">
             <span class="sr-only">Whisper</span>
             <img class="h-8 w-auto" src="../../assets/vue.svg" alt="">
-          </a>
+          </router-link>
           <span class="mt-1 ml-3 text-lg font-semibold uppercase" style="color: #37bdf8">Whisper</span>
           <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" @click="showMobileNavbar = !showMobileNavbar">
             <span class="sr-only">Close menu</span>
@@ -46,12 +46,12 @@
         <div class="mt-6 flow-root">
           <div class="-my-6 divide-y divide-gray-500/10">
             <div class="space-y-2 py-6">
-              <a href="/" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Home</a>
-              <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">My Quotes</a>
+              <router-link to="/" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Home</router-link>
+              <router-link to="/my-account" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">My Quotes</router-link>
             </div>
             <div class="py-6">
-              <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Sign up</a>
-              <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</a>
+              <router-link to="/registration" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Sign up</router-link>
+              <router-link to="/login" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</router-link>
             </div>
           </div>
         </div>
