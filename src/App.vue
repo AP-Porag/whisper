@@ -24,7 +24,21 @@ export default {
     Footer,
   },
   data () {
-    return {}
-  }
+    return {
+      user:{
+        isLoggedIn:false,
+        id: 12,
+        name: "",
+        email: "",
+        user_type: "",
+        avatar_url: null,
+        token: ""
+      }
+    }
+  },
+  mounted() {
+    // localStorage.setItem('user', JSON.stringify(self.user))
+  },
+
 }
 </script>

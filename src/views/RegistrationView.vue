@@ -60,6 +60,7 @@ import Swal from 'sweetalert2'
 import axios from 'axios'
 import { useVuelidate } from '@vuelidate/core'
 import { required,email } from '@vuelidate/validators'
+import router from "../router/index.js";
 export default {
   name: "RegistrationView",
   setup: () => ({ v$: useVuelidate() }),
@@ -76,27 +77,33 @@ export default {
   },
   methods:{
     async submit(e){
+      let self = this;
       e.preventDefault();
       if (this.checkSubmit()){
-        await Swal.fire("Saved! Please login", "", "success");
-        this.form_data.name = '';
-        this.form_data.email = '';
-        this.form_data.password = '';
         // Submit form
-        //  await axios
-        //     .post("/admin/thirds", this.form_data)
-        //     .then(function (response) {
-        //       Swal.fire("Saved! Please login", "", "success");
-        //       window.location.reload()
-        //       // window.location.href = "/admin/thirds";
-        //     })
-        //     .catch(function (err) {
-        //       try {
-        //         Swal.fire("Something went wrong", "", "error");
-        //       } catch (e) {
-        //         Swal.fire("Something went wrong", "", "error");
-        //       }
-        //     });
+        await axios
+            .post("http://whisper-admin.test/api/registration", self.form_data)
+            .then(function (response) {
+
+              if (response.data.status == 200){
+                Swal.fire("Saved! Please login", "", "success");
+                self.form_data.name = '';
+                self.form_data.email = '';
+                self.form_data.password = '';
+
+                router.push('/login');
+              }else {
+                Swal.fire(response.data.message, "", "error");
+              }
+            })
+            .catch(function (err) {
+              console.log(err)
+              try {
+                Swal.fire("Something went wrong", "", "error");
+              } catch (e) {
+                Swal.fire("Something went wrong", "", "error");
+              }
+            });
       }else {
         await Swal.fire("Please fill form information", "", "info");
       }

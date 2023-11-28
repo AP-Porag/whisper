@@ -18,11 +18,12 @@
       </div>
       <div class="hidden lg:flex lg:gap-x-12">
         <router-link to="/" class="text-sm font-semibold leading-6 text-gray-900">Home</router-link>
-        <router-link to="/my-account" class="text-sm font-semibold leading-6 text-gray-900">My Quotes</router-link>
+        <router-link to="/my-account" class="text-sm font-semibold leading-6 text-gray-900" v-if="user != null">My Quotes</router-link>
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <router-link to="/registration" class="text-sm font-semibold leading-6 text-gray-900 mr-5">Sign up <span aria-hidden="true"></span></router-link>
-        <router-link to="/login" class="text-sm font-semibold leading-6 text-gray-900">Log in <span aria-hidden="true"></span></router-link>
+        <router-link to="/registration" class="text-sm font-semibold leading-6 text-gray-900 mr-5" v-if="user == null">Sign up <span aria-hidden="true"></span></router-link>
+        <router-link to="/login" class="text-sm font-semibold leading-6 text-gray-900" v-if="user == null">Log in <span aria-hidden="true"></span></router-link>
+        <button @click="logout"  class="text-sm font-semibold leading-6 text-gray-900" v-else>Log Out <span aria-hidden="true"></span></button>
       </div>
     </nav>
     <!-- Mobile menu, show/hide based on menu open state. -->
@@ -47,11 +48,12 @@
           <div class="-my-6 divide-y divide-gray-500/10">
             <div class="space-y-2 py-6">
               <router-link to="/" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Home</router-link>
-              <router-link to="/my-account" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">My Quotes</router-link>
+              <router-link to="/my-account" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50" v-if="user != null">My Quotes</router-link>
             </div>
             <div class="py-6">
               <router-link to="/registration" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Sign up</router-link>
-              <router-link to="/login" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</router-link>
+              <router-link to="/login" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50" v-if="user == null">Log in</router-link>
+              <button @click="logout" type="button" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50" v-else>Log out</button>
             </div>
           </div>
         </div>
@@ -61,15 +63,61 @@
 </template>
 
 <script>
+import axios from "axios";
+import router from "../../router/index.js";
+import Swal from "sweetalert2";
+
 export default {
   name: "Header",
   data(){
     return{
+      user: null,
       showMobileNavbar:false,
     }
   },
+  created() {
+    this.getLocalUser();
+  },
   methods:{
+    async getLocalUser(){
+      let user = JSON.parse(localStorage.getItem('user')) || null;
+      console.log(user)
 
+      if (user == 'undefined'){
+        console.log('undefineds')
+      }else {
+        console.log('undefineds')
+        this.user = user;
+        console.log(this.user[0].id)
+      }
+    },
+
+    logout(){
+      // let self = this;
+      console.log('clicked')
+
+      axios.post("http://whisper-admin.test/api/logout")
+          .then(function (response) {
+
+            if (response.data.status == 200){
+              // self.$toast.success('Successfully Logged out',{position:"top-right"})
+              localStorage.setItem('user', null)
+              self.user = null
+
+              // window.location.reload();
+              router.push('/');
+              window.location.reload();
+            }
+          })
+          .catch(function (err) {
+            console.log(err)
+            try {
+              Swal.fire("Something went wrong", "", "error");
+            } catch (e) {
+              Swal.fire("Something went wrong", "", "error");
+            }
+          });
+    }
   }
 }
 </script>

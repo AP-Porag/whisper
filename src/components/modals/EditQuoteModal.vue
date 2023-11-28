@@ -57,7 +57,7 @@ import { required } from '@vuelidate/validators'
 import Swal from "sweetalert2";
 import axios from "axios";
 export default {
-  name: "CreateQuoteModal",
+  name: "EditQuoteModal",
   props:["user"],
   setup: () => ({ v$: useVuelidate() }),
   data() {

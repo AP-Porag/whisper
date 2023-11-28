@@ -53,6 +53,7 @@ import Swal from 'sweetalert2'
 import axios from 'axios'
 import { useVuelidate } from '@vuelidate/core'
 import { required,email } from '@vuelidate/validators'
+import router from "../router/index.js";
 export default {
   name: "LoginView",
   setup: () => ({ v$: useVuelidate() }),
@@ -62,38 +63,49 @@ export default {
       user:[],
       isLoggedIn:false,
       form_data:{
-        'email':'',
-        'password':'',
+        email:'',
+        password:'',
       }
     }
   },
   methods:{
     async submit(e){
+      let self = this;
       e.preventDefault();
       if (this.checkSubmit()){
-        this.$toast.success('Successfully Logged in',{position:"top-right"})
 
-        this.user.push(this.form_data)
-        localStorage.setItem('user', JSON.stringify(this.user))
-        this.isLoggedIn = true;
-
-        this.form_data.email = '';
-        this.form_data.password = '';
         // Submit form
-        // await axios
-        //     .post("/admin/thirds", this.form_data)
-        //     .then(function (response) {
-        //       Swal.fire("Saved! Please login", "", "success");
-        //       window.location.reload()
-        //       // window.location.href = "/admin/thirds";
-        //     })
-        //     .catch(function (err) {
-        //       try {
-        //         Swal.fire("Something went wrong", "", "error");
-        //       } catch (e) {
-        //         Swal.fire("Something went wrong", "", "error");
-        //       }
-        //     });
+        await axios
+            .post("http://whisper-admin.test/api/login", this.form_data)
+            .then(function (response) {
+
+              if (response.data.status == 200){
+                self.$toast.success('Successfully Logged in',{position:"top-right"})
+                self.user.push(response.data.data)
+                localStorage.setItem('user', JSON.stringify(self.user))
+                self.isLoggedIn = true;
+
+                self.form_data.email = '';
+                self.form_data.password = '';
+
+                window.location.reload();
+                // router.push('/');
+              }else {
+                Swal.fire("Wrong credentials!", "", "error");
+              }
+              // window.location.reload()
+              // window.location.href = "/admin/thirds";
+              router.push('/');
+              // window.location.reload();
+            })
+            .catch(function (err) {
+              console.log(err)
+              try {
+                Swal.fire("Something went wrong", "", "error");
+              } catch (e) {
+                Swal.fire("Something went wrong", "", "error");
+              }
+            });
       }else {
         await Swal.fire("Please give your credentials", "", "info");
       }

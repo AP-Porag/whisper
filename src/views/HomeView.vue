@@ -1,5 +1,6 @@
 <template>
 <div class="">
+  <hero/>
   <Quotes/>
   <Favorites/>
 </div>
