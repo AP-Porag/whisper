@@ -82,7 +82,7 @@ export default {
       if (this.checkSubmit()){
         // Submit form
         await axios
-            .post("http://whisper-admin.test/api/registration", self.form_data)
+            .post("https://whisper.shadeofattire.com/api/registration", self.form_data)
             .then(function (response) {
 
               if (response.data.status == 200){

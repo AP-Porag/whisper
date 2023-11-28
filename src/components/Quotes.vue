@@ -82,7 +82,7 @@ export default {
     async getAllQuotes(){
       let self = this;
       await axios
-          .get("http://whisper-admin.test/api/quotes")
+          .get("https://whisper.shadeofattire.com/api/quotes")
           .then(function (response) {
 
             if (response.data.status == 200){
@@ -97,13 +97,13 @@ export default {
     async like(id){
       let self = this;5
       await axios
-          .post(`http://whisper-admin.test/api/quotes/increase/like/${id}`)
+          .post(`https://whisper.shadeofattire.com/api/quotes/increase/like/${id}`)
           .then(function (response) {
 
             if (response.data.status == 200){
               var food = self.items.find(item => item.id === id)
 
-              let increase = parseInt(food.like)+1;
+              let increase = food.like != null? parseInt(food.like)+1 : 0+1;
               food.like = increase
               self.$toast.success('Saved',{position:"top-right"})
 
@@ -121,13 +121,13 @@ export default {
     async dislike(id){
       let self = this;5
       await axios
-          .post(`http://whisper-admin.test/api/quotes/increase/dislike/${id}`)
+          .post(`https://whisper.shadeofattire.com/api/quotes/increase/dislike/${id}`)
           .then(function (response) {
 
             if (response.data.status == 200){
               var food = self.items.find(item => item.id === id)
 
-              let increase = parseInt(food.dislike)+1;
+              let increase = food.dislike != null? parseInt(food.dislike)+1 :0+1;
               food.dislike = increase
               self.$toast.success('Saved',{position:"top-right"})
 
@@ -145,13 +145,13 @@ export default {
     async favorite(id){
       let self = this;5
       await axios
-          .post(`http://whisper-admin.test/api/quotes/increase/favorite/${id}`)
+          .post(`https://whisper.shadeofattire.com/api/quotes/increase/favorite/${id}`)
           .then(function (response) {
 
             if (response.data.status == 200){
               var food = self.items.find(item => item.id === id)
 
-              let increase = parseInt(food.favorite)+1;
+              let increase = food.favorite != null? parseInt(food.favorite)+1 : 0+1;
               food.favorite = increase
               self.$toast.success('Saved',{position:"top-right"})
 
@@ -169,7 +169,7 @@ export default {
     async deleteQuote(index,id){
       let self = this;
       await axios
-          .delete(`http://whisper-admin.test/api/quotes/${id}`)
+          .delete(`https://whisper.shadeofattire.com/api/quotes/${id}`)
           .then(function (response) {
 
             if (response.data.status == 200){

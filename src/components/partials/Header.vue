@@ -96,7 +96,7 @@ export default {
       // let self = this;
       console.log('clicked')
 
-      axios.post("http://whisper-admin.test/api/logout")
+      axios.post("https://whisper.shadeofattire.com/api/logout")
           .then(function (response) {
 
             if (response.data.status == 200){

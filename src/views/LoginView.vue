@@ -76,7 +76,7 @@ export default {
 
         // Submit form
         await axios
-            .post("http://whisper-admin.test/api/login", this.form_data)
+            .post("https://whisper.shadeofattire.com/api/login", this.form_data)
             .then(function (response) {
 
               if (response.data.status == 200){
