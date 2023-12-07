@@ -88,7 +88,8 @@ export default {
                 self.form_data.email = '';
                 self.form_data.password = '';
 
-                window.location.reload();
+                // window.location.reload();
+                window.location.assign('/');
                 // router.push('/');
               }else {
                 Swal.fire("Wrong credentials!", "", "error");
