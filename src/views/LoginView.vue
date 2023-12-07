@@ -89,7 +89,7 @@ export default {
                 self.form_data.password = '';
 
                 // window.location.reload();
-                window.location.assign('/');
+                window.location.assign('https://ap-porag.github.io/whisper/');
                 // router.push('/');
               }else {
                 Swal.fire("Wrong credentials!", "", "error");
