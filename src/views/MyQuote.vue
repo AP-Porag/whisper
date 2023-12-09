@@ -10,17 +10,17 @@
           <h3 class="created_at">{{item.created_at}}</h3>
           <p>{{item.quote}}</p>
           <div class="flex justify-content-between">
-            <input type="text" v-model.trim="v$.form_data.quote.$model" name="" id="" placeholder="Enter your quote to edit" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none">
-            <button @click.prevent="update(item.id)" data-toggle="modal" data-target="#myModal" type="button" style="padding: 9px;margin: 8px;" class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+            <input type="text" v-model.trim="item.quote" name="" id="" placeholder="Enter your quote to edit" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none">
+            <button @click.prevent="update(item.id,item.quote)" data-toggle="modal" data-target="#myModal" type="button" style="padding: 9px;margin: 8px;" class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
               </svg>
               <span class="sr-only">Edit</span>
             </button>
           </div>
-          <div class="text-red-500" v-if="v$.form_data.quote.required.$invalid && show_error">
-            Quote is required
-          </div>
+<!--          <div class="text-red-500" v-if="show_error">-->
+<!--            Quote is required-->
+<!--          </div>-->
           <h1>"{{item.user_name}}</h1>
           <div class="button_div" style="margin-bottom: 30px">
             <button @click="like(item.id)" type="button" class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
@@ -74,9 +74,9 @@ export default {
       dontShowQuoteBox:true,
       items:[],
       show_error:false,
-      form_data:{
-        quote:'',
-      }
+      // form_data:{
+      //   quotes:'',
+      // }
     }
   },
   created() {
@@ -208,41 +208,50 @@ export default {
         this.user = user;
       }
     },
-    async update(id){
+    async update(id,quote){
+      console.log(id)
+      console.log(quote)
       let self = this;
-      if (this.checkSubmit()){
+      if (id && quote){
+
+        let form_data = {
+          quote:quote,
+        }
+
+        console.log(form_data)
         // Submit form
         await axios
-            .put(`https://whisper.shadeofattire.com/api/quotes/${id}`, self.form_data)
+            .put(`https://whisper.shadeofattire.com/api/quotes/${id}`, form_data)
             .then(function (response) {
-              console.log(response.data.status)
+              // console.log(response.data.status)
               if (response.data.status == 200){
                 self.$toast.success("Successfully updated",{position:"top-right"});
                 self.form_data.quote = '';
                 // window.location.reload()
-                window.location.assign(`https://ap-porag.github.io/whisper/my-account/${this.user[0].id}`);
+                // window.location.assign(`https://ap-porag.github.io/whisper/my-account/${this.user[0].id}`);
               }
 
             })
             .catch(function (err) {
-              try {
-                Swal.fire("Something went wrong", "", "error");
-              } catch (e) {
-                Swal.fire("Something went wrong", "", "error");
-              }
+              console.log(err)
+              // try {
+              //   Swal.fire("Something went wrong", "", "error");
+              // } catch (e) {
+              //   Swal.fire("Something went wrong", "", "error");
+              // }
             });
       }else {
         await Swal.fire("Please write your quote", "", "info");
       }
     },
-    checkSubmit(){
-      this.v$.$touch()
-      if (this.v$.form_data.quote.$invalid) {
-        this.show_error = true;
-        return false;
-      }
-      return true;
-    },
+    // checkSubmit(){
+    //   this.v$.$touch()
+    //   if (this.v$.form_data.quote.$invalid) {
+    //     this.show_error = true;
+    //     return false;
+    //   }
+    //   return true;
+    // },
   },
   validations: {
     form_data: {
@@ -250,7 +259,18 @@ export default {
         required,
       },
     }
-  }
+  },
+  // validations() {
+  //   const form_data: { [rule: string]: any } = {};
+  //   this.items.forEach(item => {
+  //     form_data[item] = {
+  //       required: requiredIf(function(this: any): boolean {
+  //       return this.isAttributeRequired(attr);
+  //     }),
+  //   };
+  //   });
+  //   return { form_data };
+  // },
 }
 </script>
 
