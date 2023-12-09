@@ -219,7 +219,8 @@ export default {
               if (response.data.status == 200){
                 self.$toast.success("Successfully updated",{position:"top-right"});
                 self.form_data.quote = '';
-                window.location.reload()
+                // window.location.reload()
+                window.location.assign(`https://ap-porag.github.io/whisper/my-account/${this.user[0].id}`);
               }
 
             })
