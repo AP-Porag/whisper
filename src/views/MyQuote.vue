@@ -4,7 +4,8 @@
     <div class="m-auto grid grid-cols-1 md:grid-cols-2 gap-20" v-if="items.length > 0">
       <div class="blog_post" v-for="(item,index) in items" :key="item.id">
         <div class="img_pod">
-          <img src="https://pbs.twimg.com/profile_images/890901007387025408/oztASP4n.jpg" alt="random image">
+<!--          <img src="https://pbs.twimg.com/profile_images/890901007387025408/oztASP4n.jpg" alt="random image">-->
+          <img src="../assets/vue.svg" alt="random image">
         </div>
         <div class="container_copy">
           <h3 class="created_at">{{item.created_at}}</h3>
@@ -303,9 +304,10 @@ export default {
 .img_pod {
   height: 60px;
   width: 60px;
-  background: linear-gradient(90deg, #ff9966, #ff5e62);
+  //background: linear-gradient(90deg, #ff9966, #ff5e62);
+  background: white;
   z-index: 10;
-  box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
+  //box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
   border-radius: 100%;
   position: absolute;
   left: -4%;
