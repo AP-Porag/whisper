@@ -106,8 +106,9 @@ export default {
               self.user = null
 
               // window.location.reload();
-              router.push('/');
-              window.location.reload();
+              window.location.assign('https://ap-porag.github.io/whisper/');
+              // router.push('/');
+              // window.location.reload();
             }
           })
           .catch(function (err) {
